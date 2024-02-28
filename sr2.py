@@ -110,6 +110,10 @@ if __name__ == "__main__":
                     diffusion.set_new_noise_schedule(
                         opt['model']['beta_schedule']['val'], schedule_phase='val')
                     for _,  val_data in enumerate(val_loader):
+
+                        if config.getint('MaxValidationSamples') > 0 and idx > config.getint('MaxValidationSamples'):
+                            break
+
                         idx += 1
                         diffusion.feed_data(val_data)
                         diffusion.test(continous=False)
