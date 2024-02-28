@@ -179,7 +179,7 @@ class UltraDataModule(pl.LightningDataModule):
 
 
     def val_dataloader(self):
-        return torch.utils.data.DataLoader(self.val_set, batch_size=self.bs, shuffle=False, num_workers=self.config.getint('NumWorkers'))
+        return torch.utils.data.DataLoader(self.val_set, batch_size=1, shuffle=False, num_workers=self.config.getint('NumWorkers'))
 
 
     def test_dataloader(self):
