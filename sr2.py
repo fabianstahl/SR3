@@ -60,6 +60,7 @@ if __name__ == "__main__":
     data_module     = data.UltraDataModule(config, base_class)
     train_loader    = data_module.train_dataloader()
     val_loader      = data_module.val_dataloader()
+    test_loader     = data_module.test_dataloader()
     logger.info('Initial Dataset Finished')
 
     # model
@@ -183,9 +184,9 @@ if __name__ == "__main__":
         idx = 0
         result_path = '{}'.format(opt['path']['results'])
         os.makedirs(result_path, exist_ok=True)
-        for _,  val_data in enumerate(val_loader):
+        for _,  test_data in enumerate(test_loader):
             idx += 1
-            diffusion.feed_data(val_data)
+            diffusion.feed_data(test_data)
             diffusion.test(continous=True)
             visuals = diffusion.get_current_visuals()
 
