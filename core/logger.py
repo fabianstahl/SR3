@@ -58,21 +58,6 @@ def parse(args):
     else:
         opt['distributed'] = False
 
-    # debug
-    if 'debug' in opt['name']:
-        opt['train']['val_freq'] = 2
-        opt['train']['print_freq'] = 2
-        opt['train']['save_checkpoint_freq'] = 3
-        opt['datasets']['train']['batch_size'] = 2
-        opt['model']['beta_schedule']['train']['n_timestep'] = 10
-        opt['model']['beta_schedule']['val']['n_timestep'] = 10
-        opt['datasets']['train']['data_len'] = 6
-        opt['datasets']['val']['data_len'] = 3
-
-    # validation in train phase
-    if phase == 'train':
-        opt['datasets']['val']['data_len'] = 3
-
     # W&B Logging
     try:
         log_wandb_ckpt = args.log_wandb_ckpt
@@ -90,7 +75,7 @@ def parse(args):
     except:
         pass
     opt['enable_wandb'] = enable_wandb
-    
+
     return opt
 
 
